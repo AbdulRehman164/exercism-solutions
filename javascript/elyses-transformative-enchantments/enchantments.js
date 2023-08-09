@@ -1,5 +1,7 @@
 // @ts-check
 
+import { lstat } from 'fs';
+
 /**
  * Double every card in the deck.
  *
@@ -8,7 +10,7 @@
  * @returns {number[]} deck with every card doubled
  */
 export function seeingDouble(deck) {
-  throw new Error('Implement the seeingDouble function');
+  return deck.map((card) => card * 2);
 }
 
 /**
@@ -19,7 +21,10 @@ export function seeingDouble(deck) {
  * @returns {number[]} deck with triplicate 3s
  */
 export function threeOfEachThree(deck) {
-  throw new Error('Implement the threeOfEachThree function');
+  return deck.reduce((acc, cur) => {
+    if (cur === 3) return acc.concat(3, 3, 3);
+    return acc.concat(cur);
+  }, []);
 }
 
 /**
@@ -31,7 +36,7 @@ export function threeOfEachThree(deck) {
  * @returns {number[]} deck with only two middle cards
  */
 export function middleTwo(deck) {
-  throw new Error('Implement the middleTwo function');
+  return deck.slice(4, 6);
 }
 
 /**
@@ -43,7 +48,13 @@ export function middleTwo(deck) {
  */
 
 export function sandwichTrick(deck) {
-  throw new Error('Implement the sandwichTrick function');
+  const first = deck.shift();
+  const last = deck.pop();
+
+  deck.splice(deck.length / 2, 0, first);
+  deck.splice(deck.length / 2, 0, last);
+
+  return deck;
 }
 
 /**
@@ -54,7 +65,7 @@ export function sandwichTrick(deck) {
  * @returns {number[]} deck with only 2s
  */
 export function twoIsSpecial(deck) {
-  throw new Error('Implement the twoIsSpecial function');
+  return deck.filter((card) => card === 2);
 }
 
 /**
@@ -65,7 +76,7 @@ export function twoIsSpecial(deck) {
  * @returns {number[]} ordered deck
  */
 export function perfectlyOrdered(deck) {
-  throw new Error('Implement the perfectlyOrdered function');
+  return deck.sort((card1, card2) => (Number(card1) < Number(card2) ? -1 : 1));
 }
 
 /**
@@ -76,5 +87,5 @@ export function perfectlyOrdered(deck) {
  * @returns {number[]} reordered deck
  */
 export function reorder(deck) {
-  throw new Error('Implement the reorder function');
+  return deck.reverse();
 }
