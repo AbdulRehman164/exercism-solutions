@@ -16,7 +16,8 @@ export class OverheatingError extends Error {
  * @throws {Error}
  */
 export function checkHumidityLevel(humidityPercentage) {
-  throw new Error('Implement the checkHumidity function');
+  if (humidityPercentage > 70)
+    throw new Error(`Humidity is high ${humidityPercentage}`);
 }
 
 /**
@@ -26,7 +27,8 @@ export function checkHumidityLevel(humidityPercentage) {
  * @throws {ArgumentError|OverheatingError}
  */
 export function reportOverheating(temperature) {
-  throw new Error('Implement the reportOverheating function');
+  if (temperature === null) throw new ArgumentError();
+  else if (temperature > 500) throw new OverheatingError(temperature);
 }
 
 /**
@@ -41,5 +43,14 @@ export function reportOverheating(temperature) {
  * @throws {ArgumentError|OverheatingError|Error}
  */
 export function monitorTheMachine(actions) {
-  throw new Error('Implement the monitorTheMachine function');
+  try {
+    actions.check();
+  } catch (error) {
+    if (error instanceof ArgumentError) actions.alertDeadSensor();
+    else if (error instanceof OverheatingError) {
+      error.temperature < 600 ? actions.alertOverheating() : actions.shutdown();
+    } else {
+      throw error;
+    }
+  }
 }
