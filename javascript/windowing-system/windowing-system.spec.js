@@ -92,6 +92,15 @@ describe('resize', () => {
     expect(programWindow.size.width).toBe(1);
     expect(programWindow.size.height).toBe(1);
   });
+
+  test('maximum size is working correctly', () => {
+    const programWindow = new ProgramWindow();
+    const newSize = new Size(900, 900);
+    programWindow.resize(newSize);
+
+    expect(programWindow.size.width).toBe(800);
+    expect(programWindow.size.height).toBe(600);
+  });
 });
 
 describe('move', () => {
