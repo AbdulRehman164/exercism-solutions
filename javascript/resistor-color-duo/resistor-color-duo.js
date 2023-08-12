@@ -3,6 +3,19 @@
 // convenience to get you started writing code faster.
 //
 
-export const decodedValue = () => {
-  throw new Error('Remove this statement and implement this function');
+const COLORS = [
+  'black',
+  'brown',
+  'red',
+  'orange',
+  'yellow',
+  'green',
+  'blue',
+  'violet',
+  'grey',
+  'white',
+];
+
+export const decodedValue = (values) => {
+  return Number(String(COLORS.indexOf(values[0])) + COLORS.indexOf(values[1]));
 };
